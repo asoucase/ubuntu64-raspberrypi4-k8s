@@ -1,3 +1,8 @@
-[k8s-master]
-master
+[master]
+pimaster
 
+[node1]
+pinode1
+
+[node2]
+pinode2
