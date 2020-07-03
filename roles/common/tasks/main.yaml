@@ -1,0 +1,44 @@
+---
+- name: Install ssh server
+  apt:
+    name:
+      - openssh-server
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Use UTC timezone
+  file:
+    src: /usr/share/zoneinfo/UTC
+    dest: /etc/localtime
+    state: link
+    owner: root
+    group: root
+
+- name: Configure timesyncd
+  systemd:
+    name: systemd-timesyncd
+    state: started
+
+- name: Create user accounts
+  user:
+    name: "{{ username }}"
+    state: present
+    shell: /bin/bash
+    groups:
+      - sudo
+
+- name: Copy SSH key
+  authorized_key:
+    user: "{{ username }}"
+    key: "{{ lookup('file', 'ssh-key.pub') }}"
+    state: present
+    exclusive: no
+
+- name: Configure sshd
+  copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+    mode: 0600
+    validate: /usr/sbin/sshd -tf %s
+  notify: restart sshd

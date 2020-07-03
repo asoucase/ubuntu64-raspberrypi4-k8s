@@ -1,0 +1,6 @@
+---
+# Ansible
+ansible_become: yes
+
+# User
+username: arturo
