@@ -20,6 +20,10 @@
     name: systemd-timesyncd
     state: started
 
+- name: Set hostname
+  hostname:
+    name: "{{ hostname }}"
+
 - name: Create user accounts
   user:
     name: "{{ username }}"
