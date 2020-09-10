@@ -27,7 +27,7 @@
 - name: Copy boot cmdline file
   copy:
     src: cmdline.txt
-    dest: /boot/firmware/cmdline.txt
+    dest: /boot/cmdline.txt
 
 - name: Create user accounts
   user:
