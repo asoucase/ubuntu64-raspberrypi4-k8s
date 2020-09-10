@@ -1,5 +1,5 @@
 # ![](.github/images/rpi.png) ![](.github/images/ubuntu.png) ![](.github/images/k8s.png) Kubernetes Raspberry Pi 4 Cluster
-Ansible playbook to set up Kubernetes in a Raspberry Pi 4 Cluster with [k3s](https://https://k3s.io/).
+Ansible playbook to set up Kubernetes on a Raspberry Pi 4 Cluster with [k3s](https://https://k3s.io/).
 
 ![](.github/images/cluster.jpg)
 
