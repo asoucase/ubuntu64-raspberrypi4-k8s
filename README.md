@@ -10,7 +10,7 @@ Actions:
 - Sets UTC timezone
 - Sets boot cmdline file with correct cgroup options
 - Creates new user
-- Enables sudo to be passwordless
+- Enables password-less sudo 
 - Adds public ssh key
 - Configures ssh server for key-based authentication only
 
