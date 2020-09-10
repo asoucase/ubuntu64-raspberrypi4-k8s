@@ -1,5 +1,5 @@
-# ![](.github/images/rpi.png) ![](.github/images/ubuntu.png) ubuntu64-raspberrypi4
-Ansible playbook to set up a Raspberry Pi 4 Cluster.
+# ![](.github/images/rpi.png) ![](.github/images/ubuntu.png) ![](.github/images/k8s.png) Kubernetes Raspberry Pi 4 Cluster
+Ansible playbook to set up Kubernetes in a Raspberry Pi 4 Cluster with [k3s](https://https://k3s.io/).
 
 ![](.github/images/cluster.jpg)
 
@@ -19,6 +19,7 @@ Ansible playbook to set up a Raspberry Pi 4 Cluster.
 
 - Configures ssh server for key-based authentication only
 
+- Installs Rancher's k3s kubernetes distro
 
 
 ## Requirements
@@ -33,26 +34,27 @@ Ansible playbook to set up a Raspberry Pi 4 Cluster.
   ```
 
 
-
 ## Steps
 
-1. Set each raspberry pi's IP, hostname and the location of the ssh key in folder `host_vars`. Replace file `roles/common/files/ssh-key.pub` with your own public ssh key.
+1. Set master and nodes in inventory file `inventory`
+
+2. Set each raspberry pi's IP, hostname and the location of the ssh key in folder `host_vars`. Replace file `roles/common/files/ssh-key.pub` with your own public ssh key.
 
 
-2. Flash a microsd card with the latest ubuntu image for raspberry pi 4 (arm64) using [Balena-Etcher](https://www.balena.io/etcher/). 
+3. Flash a microsd card with the latest ubuntu image for raspberry pi 4 (arm64) using [Balena-Etcher](https://www.balena.io/etcher/). 
 
     ![](.github/images/etcher.png)
 
-3. Boot your raspberry pi with the microsd card and log in as username/password `ubuntu`/`ubuntu`.  You will be prompted to change the default password.
+4. Boot your raspberry pi with the microsd card and log in as username/password `ubuntu`/`ubuntu`.  You will be prompted to change the default password.
 
 
-4. Update apt and install ssh package, so that ansible can connect to the raspberry pi.
+5. Update apt and install ssh package, so that ansible can connect to the raspberry pi.
    
    ```bash
    $ sudo apt update && sudo apt install -y ssh 
    ```
 
-5. Run playbook as ubuntu user and add `--ask-pass` to make use of the user's password
+6. Run playbook as ubuntu user and add `--ask-pass` to make use of the user's password
    
    ```bash
    $ ansible-playbook playbook.yaml --ask-pass -u ubuntu
@@ -62,6 +64,24 @@ Once all these steps have been executed, you can run any ansible command or play
 
 
 ![](.github/images/asciinema.gif)
+
+## K3s
+
+To view the list of kubernetes nodes:
+
+```bash
+$ sudo k3s kubectl get nodes
+```
+
+You can also set an alias for kubectl:
+
+```bash
+$ sudo -i
+
+$ alias k="k3s kubectl"
+
+$ k get nodes
+```
 
 
 ## Extra
@@ -77,3 +97,7 @@ To add ssh key to ssh agent:
 ```bash
 $ ssh-add ~/.ssh/id_rsa
 ```
+
+
+**Note:**  
+k3s roles from repo https://github.com/rancher/k3s-ansible

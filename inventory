@@ -6,3 +6,7 @@ pinode1
 
 [node2]
 pinode2
+
+[nodes:children]
+node1
+node2
