@@ -53,3 +53,10 @@ Steps:
    $ ansible-playbook playbook.yaml --ask-pass
    ```
 
+Extra:
+
+To generate an ssh key pair:
+
+```bash
+$ ssh-keygen -t rsa -b 4096
+```
