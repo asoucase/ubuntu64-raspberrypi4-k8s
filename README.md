@@ -5,18 +5,23 @@ Ansible playbook to set up a Raspberry Pi 4 Cluster.
 
 
 
-Actions:
+## Actions
 
 - Sets UTC timezone
+
 - Sets boot cmdline file with correct cgroup options
-- Creates new user
+
+- Creates new user: kube
+
 - Enables password-less sudo 
+
 - Adds public ssh key
+
 - Configures ssh server for key-based authentication only
 
 
 
-Requirements:
+## Requirements
 
 - (obviously) One or more Raspberry Pi 4s
 
@@ -29,9 +34,9 @@ Requirements:
 
 
 
-Steps:
+## Steps
 
-1. Set each raspberry pi's IP and hostname in folder `host_vars`. Replace file `roles/common/files/ssh-key.pub` with your own public ssh key.
+1. Set each raspberry pi's IP, hostname and the location of the ssh key in folder `host_vars`. Replace file `roles/common/files/ssh-key.pub` with your own public ssh key.
 
 
 2. Flash a microsd card with the latest ubuntu image for raspberry pi 4 (arm64) using [Balena-Etcher](https://www.balena.io/etcher/). 
@@ -47,16 +52,28 @@ Steps:
    $ sudo apt update && sudo apt install -y ssh 
    ```
 
-5. Run playbook using the `--ask-pass` to make use of the user's password. 
+5. Run playbook as ubuntu user and add `--ask-pass` to make use of the user's password
    
    ```bash
-   $ ansible-playbook playbook.yaml --ask-pass
+   $ ansible-playbook playbook.yaml --ask-pass -u ubuntu
    ```
 
-Extra:
+Once all these steps have been executed, you can run any ansible command or playbook using your ssh key
+
+
+![](.github/images/ansible-ping.png)
+
+
+## Extra
 
 To generate an ssh key pair:
 
 ```bash
 $ ssh-keygen -t rsa -b 4096
+```
+
+To add ssh key to ssh agent:
+
+```bash
+$ ssh-add ~/.ssh/id_rsa
 ```
