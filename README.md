@@ -61,7 +61,7 @@ Ansible playbook to set up a Raspberry Pi 4 Cluster.
 Once all these steps have been executed, you can run any ansible command or playbook using your ssh key
 
 
-![](.github/images/ansible-ping.png)
+![](.github/images/asciinema.gif)
 
 
 ## Extra
