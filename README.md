@@ -83,6 +83,7 @@ $ alias k="k3s kubectl"
 $ k get nodes
 ```
 
+Copy `/etc/rancher/k3s/k3s.yaml` as `~/.kube/config` to access the cluster from the outside.
 
 ## Extra
 
@@ -101,3 +102,4 @@ $ ssh-add ~/.ssh/id_rsa
 
 **Note:**  
 k3s roles from repo https://github.com/rancher/k3s-ansible
+
