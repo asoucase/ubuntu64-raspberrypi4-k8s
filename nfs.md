@@ -2,6 +2,8 @@
 
 These are some simple step-by-step instructions to set an NFS server on a Raspberry Pi 4 running Ubuntu 20.04 LTS.
 
+Ref: https://vitux.com/install-nfs-server-and-client-on-ubuntu/
+
 ## 1. Mount device
 
 Create a folder where we will mount the partition on the device
