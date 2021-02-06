@@ -4,6 +4,7 @@
     name:
       - openssh-server
       - nfs-common
+      - resolvconf
     state: latest
     update_cache: yes
     cache_valid_time: 3600
@@ -60,6 +61,11 @@
     mode: 0600
     validate: /usr/sbin/sshd -tf %s
   notify: restart sshd
+
+- name: Set dns server
+  copy:
+    src: resolv.conf
+    dest: /etc/resolv.conf
 
 - name: Delete k3s if already present
   file:
